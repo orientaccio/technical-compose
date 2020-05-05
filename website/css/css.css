@@ -7,7 +7,6 @@ body {
 div.sticky, 
 .textarea {
 	outline: none;
-	
     font-family: monospace;
     font-size: 1.3rem;
 }
@@ -67,14 +66,20 @@ div.sticky {
 	/* border: solid thin; */
 }
 
-.separator
-{
-	width: 5px;
-}
-
 .suggestion
 {
 	width: 250px;
+	background-color: #bec9eb;
+}
+
+.suggestion:hover 
+{	
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.separator
+{ 
+	width: 5px;
 }
 
 #suggTable {
