@@ -172,11 +172,12 @@ def sentence_to_vector(sentence, lang):
 def predict_all(input_sentence):
     sv = sentence_to_vector(input_sentence, input_lang)
     sv = sv.reshape(1,len(sv))
-    [emb_out, sh, sc] = encoder_model.predict(x=sv)
+    # [emb_out, sh, sc] = encoder_model.predict(x=sv)
+    [_, sh, sc] = encoder_model.predict(x=sv)
     
     i = 0
     start_vec = target_lang.word2idx["<start>"]
-    stop_vec = target_lang.word2idx["<end>"]
+    # stop_vec = target_lang.word2idx["<end>"]
     
     cur_vec = np.zeros((1,1))
     cur_vec[0,0] = start_vec
@@ -212,7 +213,7 @@ def predict_next(input_sentence):
 def predict(input_seq):
     output = []
     for seq in input_seq:  
-        output.append({"Input seq":seq, "Pred. Seq":predict_all(seq)})
+        output.append(predict_all(seq))
     return output
 
 input_lang, target_lang = create_dataset()
@@ -220,5 +221,5 @@ encoder_model, inf_model = initialize_model()
 
 if __name__ == '__main__':
     output = predict(["contribute to", "inform on", "lead by british"])
-    results_df = pd.DataFrame.from_dict(output) 
+    results_df = pd.DataFrame.from_dict(output)
     print(results_df.head(len(output)))

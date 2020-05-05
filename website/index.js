@@ -1,35 +1,36 @@
-function predict() {
-	//text input boxes
-	sl = document.getElementById("sl").value;
-	setosa_fn = document.getElementById("setosa");
+window.onload = function() { 
+    input = document.getElementById("input");
+	input.onkeyup = function(e) {
+		if (e.key === " ") {
+			predict();
+		}
+	}
+};
 
+function predict() {
+	input = document.getElementById("input").innerHTML;
+	send_request(input);
+}
+
+function send_request(input) {
 	$.ajax({
 		type: "POST",
-		url: "./predict.php",
-		// async: false,
+		url: "http://127.0.0.1:5000/test/api",
 		datatype: 'json',
 		data: {
-			sl: sl
+			'input': input
 		},
 		success: function(response) {
-			var obj = JSON.parse(response);
-			setosa_fn.innerHTML = obj.value;
+			// primitives only pass by value in js
+			// message = input.textContent + '<span class="unselectable">' + response.value + '</span>';
+			// document.getElementById("input").innerHTML = message;
+			document.getElementById("sugg0").innerHTML = response.value;
+			document.getElementById("sugg1").innerHTML = response.value;
+			document.getElementById("sugg2").innerHTML = response.value;
+			console.log(response);
 		},
 		error: function(response) {
 			console.log(response);
-			setosa_fn.innerHTML = "Error";
 		}
 	})
-}
-
-function proceed() {
-	sl = document.getElementById("sl").value;
-	setosa_fn = document.getElementById("setosa");
-
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', 'http://127.0.0.1:5000/test/api');
-    form.style.display = 'hidden';
-    document.body.appendChild(form)
-    form.submit();
 }

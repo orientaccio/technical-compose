@@ -1,44 +1,86 @@
 @charset "UTF-8";
-/* CSS Document */
 
 body {
-	background-color: #EFEFEF;
+	background-color: #edeff7;
+}
+
+div.sticky, 
+.textarea {
+	outline: none;
+	
+    font-family: monospace;
+    font-size: 1.3rem;
+}
+
+.textarea {
+	width: 550px;
+    height: 1000px;
+	padding: 100px;
+
+	margin-top: -60px;
+    margin-left: auto;
+	margin-right: auto;
+	
+	border-radius: 3px;
+	box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.05);
+	background-color: #ffff;
+}
+
+div.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+
+	top: 675px;
+	width: 700px;
+	height: 0px;
+	padding: 25px;
+    margin-left: auto;
+	margin-right: auto;
+
+	box-shadow: 0 5px 3px 3px rgba(0, 0, 0, 0.1);
+	background-color: #bec9eb;
+	z-index: 1;
 }
 
 .header {
-	font-size: 25px;
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+	padding: 10px;
 	text-align: center;
+	color: #6a5e82;
 }
 
-.title {
-	font-size: 25px;
+.unselectable {
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+	color:gray
 }
 
-.measurement_inputs {
-	font-size: 18px;
-	font-family: Arial, "sans-serif";
-	text-align: right;
-}
-
-.output {
-	font-size: 18px;
-	font-family: Arial, "sans-serif";
-	text-align: right;
-	background-color: #EFEFEF;
-	
-}
-
-.center {
+.separator,
+.suggestion {
+	height: 45px;
 	text-align: center;
+	color: #6a5e82;
+
+	/* border: solid thin; */
 }
 
-.ref_header {
-	font-size: 15px;
-	font-family: Arial, "sans-serif";
+.separator
+{
+	width: 5px;
 }
 
-.predict_btn {
-	font-size: 18px;
-	font-family: Arial, "sans-serif";
-	background-color: #DED7F2;
+.suggestion
+{
+	width: 250px;
 }
+
+#suggTable {
+	width: 750px;
+	margin-top: -25px;
+	margin-left: -25px;
+	margin-right: auto;
+}
+

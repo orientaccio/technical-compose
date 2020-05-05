@@ -1,7 +1,8 @@
 <?php
+	header('Access-Control-Allow-Origin: *');
 	$sl = $_POST['sl'];
 	console.log("Message here");
-	$headers = array('Content-Type: application/json', 'Access-Control-Allow-Headers: *');
+	$headers = array('Content-Type: application/json');
 	$fields = array('sl'=>$sl);
 	$payload = json_encode($fields);
 
