@@ -3,8 +3,10 @@ from flask import Flask, abort, jsonify, request
 from model.heuristic import heuristic
 import numpy as np
 
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-irisModel = None
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # @app.route("/api/predict", methods=['POST'])
 # def make_predict():
@@ -16,8 +18,8 @@ irisModel = None
 # 		'versicolor': str(y_pred[0][1]),
 # 		'virginica': str(y_pred[0][2])}), 201
 
-
 @app.route("/api/predict/", methods=['POST'])
+@cross_origin()
 def make_predict():
 	data = request.get_json()
 	print(data)
