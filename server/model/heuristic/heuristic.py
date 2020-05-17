@@ -24,12 +24,12 @@ def predict(input):
     # get the last verb index and the rest of input phrase
     verb = ""
     remain = ""
-    for i in reversed(range(len(tokens))):
+    for i in range(len(tokens)):
         if (tokens[i] in dict_data):
             verb = tokens[i]
         if (verb != ""):
             remain = input.split(verb, -1)[-1]
-            remain = remain[1:]
+            remain = remain[1:] if (remain and remain[0] == " ") else remain
     
     if (verb == ""):
         return []
@@ -39,9 +39,12 @@ def predict(input):
     values = dict_data.get(verb)
     for line in values:
         if (remain in line):
-            pred = line.split(remain, 1)[1]
-            pred = pred[1:]
-            preds[pred] = preds[pred]+1 if pred in preds else 1
+            if (remain != ''):
+                pred = line.split(remain, 1)[1]
+                pred = pred[1:] if pred[0] == " " else pred
+                preds[pred] = preds[pred]+1 if pred in preds else 1
+            else:
+                preds[line] = preds[line]+1 if line in preds else 1
     
     return sorted(preds.items(), key=lambda x: x[1], reverse=True)
 
@@ -52,8 +55,11 @@ def print_dict(n, dict_data):
 corpus = preprocess("server/model/data/sentences_vision.txt")
 dict_data = get_dict(corpus)
 
-# prediction = predict("view for")
-# print(prediction)
+# import numpy as np
+# preds_all = predict("for update enhancement receive from ")
+# preds_send = np.array(preds_all[:3])
+# preds_send = np.squeeze(np.delete(preds_send, 1, 1))
+# print(preds_send)
 
 # def main():
 #     corpus = preprocess("server/model/data/sentences_vision.txt")
