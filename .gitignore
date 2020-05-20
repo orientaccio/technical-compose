@@ -1,4 +1,5 @@
-*.h5
+ __pycache__/
 .vscode
-server/__pycache__
 server/model/distilgpt2
+ *.pyc
+ *.h5

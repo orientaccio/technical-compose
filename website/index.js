@@ -71,9 +71,18 @@ function send_request(input) {
 		}),
 		success: function(response) {
 			// primitives only pass by value in js
-			document.getElementById("sugg0").innerHTML = response['preds'][0];
-			document.getElementById("sugg1").innerHTML = response['preds'][1];
-			document.getElementById("sugg2").innerHTML = response['preds'][2];
+			console.log(typeof response);
+			if (response['preds'].length > 0) {
+				document.getElementById("sugg0").innerHTML = response['preds'][0];
+				document.getElementById("sugg1").innerHTML = response['preds'][1];
+				document.getElementById("sugg2").innerHTML = response['preds'][2];
+			}
+			else {
+				document.getElementById("sugg1").innerHTML = "-";
+				document.getElementById("sugg2").innerHTML = "-";
+				document.getElementById("sugg0").innerHTML = "-";
+			}
+
 			console.log(response);
 		},
 		error: function(response) {

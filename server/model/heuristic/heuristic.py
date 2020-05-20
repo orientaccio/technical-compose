@@ -1,4 +1,3 @@
-import pandas as pd
 from collections import defaultdict
 
 def preprocess(path):
@@ -38,7 +37,7 @@ def predict(input):
     preds = {}
     values = dict_data.get(verb)
     for line in values:
-        if (remain in line):
+        if (line.startswith(remain)):
             if (remain != ''):
                 pred = line.split(remain, 1)[1]
                 pred = pred[1:] if pred[0] == " " else pred
@@ -56,9 +55,10 @@ corpus = preprocess("server/model/data/sentences_vision.txt")
 dict_data = get_dict(corpus)
 
 # import numpy as np
-# preds_all = predict("for update enhancement receive from ")
+# preds_all = predict("contribute to")
 # preds_send = np.array(preds_all[:3])
-# preds_send = np.squeeze(np.delete(preds_send, 1, 1))
+# if (preds_send.size > 0):
+#     preds_send = np.squeeze(np.delete(preds_send, 1, 1))
 # print(preds_send)
 
 # def main():
