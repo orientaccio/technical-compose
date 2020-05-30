@@ -40,7 +40,6 @@ def predict(input):
     values = dict_data.get(verb)
     for line in values:
         if (line.startswith(remain)):
-            # if input is more than one word
             if (remain != ''):
                 pred = line.split(remain, 1)[1]
                 pred = pred[1:] if pred[0] == " " else pred
@@ -48,15 +47,19 @@ def predict(input):
                 # split to get only the next 1-word
                 pred = pred.split(" ", 1)[0]
                 preds[pred] = preds[pred]+1 if pred in preds else 1
-            # if input is only one word, remain = ''
             else:
                 # split to get only the next 1-word
                 pred = line.split(" ", 1)[0]
                 preds[pred] = preds[pred]+1 if pred in preds else 1
     
-    preds_list = np.array(sorted(preds.items(), key=lambda x: x[1], reverse=True))
-    preds_list = np.squeeze(np.delete(preds_list, 1, 1)) if preds_list.size > 0 else preds_list
-    return preds_list.tolist()
+    preds_numpy = np.array(sorted(preds.items(), key=lambda x: x[1], reverse=True))
+    preds_numpy = np.squeeze(np.delete(preds_numpy, 1, 1)) if preds_numpy.size > 0 else preds_numpy
+
+    # Fill preds_numpy with '-'
+    while (preds_numpy.size < 3):
+        preds_numpy = np.append(preds_numpy, '')
+
+    return preds_numpy.tolist()
 
 def print_dict(n, dict_data):
     dict_n = {k: dict_data[k] for k in list(dict_data)[:n]}
@@ -66,9 +69,9 @@ def print_dict(n, dict_data):
 corpus = preprocess("server/model/data/sentences_relations.txt")
 dict_data = get_dict(corpus)
 
-preds_all = predict("automation related to exchange")
-preds_send = np.array(preds_all[:3])
-print(preds_send)
+preds_all = predict("air operation")
+preds_all = np.array(preds_all[:3])
+print(preds_all)
 
 # def main():
 #     corpus = preprocess("server/model/data/sentences_vision.txt")

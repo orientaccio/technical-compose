@@ -59,6 +59,7 @@ function update_suggestions() {
 			response updates suggestion
 */
 function send_request(input) {
+	input = input.replace(/&nbsp;/g, " ")
 	console.log("message sent: " + input);
 
 	$.ajax({

@@ -15,13 +15,13 @@ number_suggestions = 3
 def make_predict():
 	# Get input and predict
 	data = request.get_json()['input']
-	preds_all = heuristic.predict(data)
+	preds_all = heuristic.predict(data)[:number_suggestions] 
 
 	# Prepare JSON
-	response = jsonify({'preds': preds_all[:number_suggestions]})
+	response = jsonify({'preds': preds_all})
 
 	logging.info('Request:\t %s', data)
-	logging.info('Answer:\t %s', response)
+	logging.info('Answer:\t %s', preds_all)
 	
 	return response, 201
 
