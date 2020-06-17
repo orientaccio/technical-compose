@@ -5,6 +5,7 @@ body {
 }
 
 div.sticky, 
+div.stickyButton,
 .textarea {
 	outline: none;
     font-family: monospace;
@@ -41,6 +42,19 @@ div.sticky {
 	z-index: 1;
 }
 
+div.stickyButton {
+	position: -webkit-sticky;
+	position: sticky;
+	font-size: 1.1rem;
+
+	top: 640px;
+	width: 200px;
+	height: 0px;
+	padding: 0px;
+	margin-left: 0px;
+	z-index: 1;
+}
+
 .header {
 	font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
@@ -66,20 +80,21 @@ div.sticky {
 	/* border: solid thin; */
 }
 
+.separator
+{ 
+	width: 5px;
+}
+
 .suggestion
 {
 	width: 250px;
 	background-color: #bec9eb;
+	cursor: pointer;
 }
 
 .suggestion:hover 
 {	
 	background-color: rgba(255, 255, 255, 0.2);
-}
-
-.separator
-{ 
-	width: 5px;
 }
 
 #suggTable {
@@ -89,3 +104,29 @@ div.sticky {
 	margin-right: auto;
 }
 
+.button {
+	position: -webkit-sticky;
+	position: sticky;
+
+	font-size: 20px;
+	border: none;
+    outline:none;
+	background: none;
+	
+	width: 150px;
+	height: 75px;
+
+	transition: all 0.5s;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: #7fc090;
+	margin-left: -15px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	
+	/* border: solid thin; */
+}
+
+.button:hover {
+	background-color: #b1d6bb;
+}

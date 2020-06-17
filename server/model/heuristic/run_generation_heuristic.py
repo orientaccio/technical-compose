@@ -69,9 +69,9 @@ def print_dict(n, dict_data):
 corpus = preprocess("server/model/data/sentences_relations.txt")
 dict_data = get_dict(corpus)
 
-preds_all = predict("air operation")
-preds_all = np.array(preds_all[:3])
-print(preds_all)
+# preds_all = predict("air operation")
+# preds_all = np.array(preds_all[:3])
+# print(preds_all)
 
 # def main():
 #     corpus = preprocess("server/model/data/sentences_vision.txt")

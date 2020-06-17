@@ -41,7 +41,7 @@ function update_suggestions() {
 	input = input.split(" ");
 	
 	n = 5;
-	input_sent = []
+	input_sent = [];
 	if (input.length > n)
 	{
 		for (i = input.length-n; i < input.length; i++) 
@@ -62,9 +62,13 @@ function send_request(input) {
 	input = input.replace(/&nbsp;/g, " ")
 	console.log("message sent: " + input);
 
+	// choose the correct API model
+	url_api = (model == 0) ? "http://127.0.0.1:5000/api/predict/heuristic/"
+						   : "http://127.0.0.1:5000/api/predict/gpt2/";
+
 	$.ajax({
 		type: "POST",
-		url: "http://127.0.0.1:5000/api/predict/",
+		url: "http://127.0.0.1:5000/api/predict/gpt2/",
 		contentType: "application/json; charset=utf-8",
     	dataType: "json",
 		data: JSON.stringify({
@@ -72,22 +76,20 @@ function send_request(input) {
 		}),
 		success: function(response) {
 			// primitives only pass by value in js
-			console.log(typeof response);
-			if (response['preds'].length > 0 && response['preds'][0] != '') {
-				document.getElementById("sugg0").innerHTML = response['preds'][0];
-				document.getElementById("sugg1").innerHTML = response['preds'][1];
-				document.getElementById("sugg2").innerHTML = response['preds'][2];
-			}
-			else {
-				document.getElementById("sugg1").innerHTML = "-";
-				document.getElementById("sugg2").innerHTML = "-";
-				document.getElementById("sugg0").innerHTML = "-";
-			}
-
+			document.getElementById("sugg0").innerHTML = (response['preds'][0] != '') ? response['preds'][0] : '-';
+			document.getElementById("sugg1").innerHTML = (response['preds'].length > 1 && response['preds'][1] != '') ? response['preds'][1] : '-';
+			document.getElementById("sugg2").innerHTML = (response['preds'].length > 2 && response['preds'][2] != '') ? response['preds'][2] : '-';
 			console.log(response);
 		},
 		error: function(response) {
 			console.log(response);
 		}
 	})
+}
+
+var model = 0; // heuristic = 0, gpt2 = 1
+function change_model() {
+	model = (model == 0) ? 1 : 0;
+	document.getElementById("buttonModel").innerHTML = (model == 0) ? "HEUR" : "GPT-2";
+	console.log("Model value: " + model);
 }

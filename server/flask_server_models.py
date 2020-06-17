@@ -1,6 +1,7 @@
 from flask import Flask, abort, jsonify, request
 from flask_cors import CORS, cross_origin
 from model.gpt2.generation import run_generation_gpt2 as gpt2
+from model.heuristic import run_generation_heuristic as heuristic
 
 import logging
 import numpy as np
@@ -26,12 +27,27 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 number_suggestions = 3
 
-@app.route("/api/predict/", methods=['POST'])
+@app.route("/api/predict/gpt2/", methods=['POST'])
 @cross_origin()
-def make_predict():
+def make_predict_gpt2():
 	# Get input and predict
 	data = request.get_json()['input']
 	preds_all = gpt2.generate(data)[:number_suggestions]
+
+	# Prepare JSON
+	response = jsonify({'preds': preds_all})
+
+	logging.info('Request:\t %s', data)
+	logging.info('Answer:\t %s', preds_all)
+	
+	return response, 201
+
+@app.route("/api/predict/heuristic/", methods=['POST'])
+@cross_origin()
+def make_predict_heuristic():
+	# Get input and predict
+	data = request.get_json()['input']
+	preds_all = heuristic.predict(data)[:number_suggestions] 
 
 	# Prepare JSON
 	response = jsonify({'preds': preds_all})
