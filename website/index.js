@@ -68,7 +68,7 @@ function send_request(input) {
 
 	$.ajax({
 		type: "POST",
-		url: "http://127.0.0.1:5000/api/predict/gpt2/",
+		url: url_api,
 		contentType: "application/json; charset=utf-8",
     	dataType: "json",
 		data: JSON.stringify({
