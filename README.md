@@ -6,7 +6,6 @@ The client writes documents and the server gives suggestions on how to complete 
 The experiment tries out many different models which includes:
 * Heuristic simple model
 * DistilGPT2: Deep network with transformers
-* RNN: Deep network
 
 ## License
 

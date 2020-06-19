@@ -1,6 +1,6 @@
  __pycache__/
 .vscode
-server/model/distilgpt2
+server/model/gpt2/distilgpt2
 env
  *.pyc
  *.h5
