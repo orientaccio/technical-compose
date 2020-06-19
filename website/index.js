@@ -58,17 +58,19 @@ function update_suggestions() {
 	@brief: send request = input_sequence to the flask server
 			response updates suggestion
 */
+// url_domain = "http://127.0.0.1:5000"
+url_domain = "https://technical-smart-compose.herokuapp.com"
 function send_request(input) {
 	input = input.replace(/&nbsp;/g, " ")
 	console.log("message sent: " + input);
 
 	// choose the correct API model
-	url_api = (model == 0) ? "http://127.0.0.1:5000/api/predict/heuristic/"
-						   : "http://127.0.0.1:5000/api/predict/gpt2/";
+	url = (model == 0) ? url_domain+"/api/predict/heuristic/"
+						: url_domain+"/api/predict/gpt2/";
 
 	$.ajax({
 		type: "POST",
-		url: url_api,
+		url: url,
 		contentType: "application/json; charset=utf-8",
     	dataType: "json",
 		data: JSON.stringify({
