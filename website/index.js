@@ -58,10 +58,14 @@ function update_suggestions() {
 	@brief: send request = input_sequence to the flask server
 			response updates suggestion
 */
-// url_domain = "http://127.0.0.1:5000"
-url_domain = "https://technical-smart-compose.herokuapp.com"
+url_domain = "http://127.0.0.1:5000"
+// url_domain = "https://technical-smart-compose.herokuapp.com"
 function send_request(input) {
 	input = input.replace(/&nbsp;/g, " ")
+	input = input.replace(/<br>/g, "")
+	input = input.replace(/<div>/g, "")
+	input = input.replace(/<\/div>/g, "")
+	input = input.replace(/\r?\n|\r/g, "");
 	console.log("message sent: " + input);
 
 	// choose the correct API model

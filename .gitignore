@@ -1,6 +1,7 @@
  __pycache__/
 .vscode
 server/model/gpt2/distilgpt2
+server/model/data_results
 env
  *.pyc
  *.h5

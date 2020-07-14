@@ -98,5 +98,5 @@ def generate(prompt_text):
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_class, tokenizer_class, tokenizer, model = load_distilgpt2(device, "server/model/gpt2/distilgpt2")
 
-# preds_all = generate("air")
+# preds_all = generate("cloud computing is built around a set of")
 # print(preds_all)

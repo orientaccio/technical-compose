@@ -20,6 +20,7 @@ def predict(input):
     Then check if the input is contained in an element of the value list of the key.
     Return the most used prediction.
     '''
+    input = input.lower()
     tokens = input.split(" ", -1)
 
     # get the last verb index and the rest of input phrase
@@ -69,7 +70,7 @@ def print_dict(n, dict_data):
 corpus = preprocess("server/model/data/sentences_relations.txt")
 dict_data = get_dict(corpus)
 
-# preds_all = predict("air operation")
+# preds_all = predict("DATA analysis. internet")
 # preds_all = np.array(preds_all[:3])
 # print(preds_all)
 
